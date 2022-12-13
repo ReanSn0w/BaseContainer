@@ -10,3 +10,5 @@ RUN cat /root/YandexRootCA.crt >> /etc/ssl/certs/ca-certificates.crt
 RUN apk --no-cache add ca-certificates && rm -rf /var/cache/apk/*
 COPY ./data/YandexRootCA.crt /usr/local/share/ca-certificates
 RUN update-ca-certificates
+
+COPY ./data/YandexRootCA.crt /home/cert.crt
