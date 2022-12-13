@@ -1,0 +1,12 @@
+FROM alpine:latest
+
+USER root
+
+# Тут не очень понятная мне магия, нашел на Stackoverflow
+# https://stackoverflow.com/questions/67231714/how-to-add-trusted-root-ca-to-docker-alpine
+COPY ./data/YandexRootCA.crt /root/YandexRootCA.crt
+RUN cat /root/YandexRootCA.crt >> /etc/ssl/certs/ca-certificates.crt
+
+RUN apk --no-cache add ca-certificates && rm -rf /var/cache/apk/*
+COPY ./data/YandexRootCA.crt /usr/local/share/ca-certificates
+RUN update-ca-certificates
